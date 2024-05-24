@@ -3,6 +3,7 @@ import Login from "@/components/LoginPage.vue"
 import HomePage from '@/views/HomePage.vue';
 import ResultPage from '@/views/ResultPage.vue';
 import StockData from "@/views/StockData.vue";
+import Indicators from "@/views/IndicatorsPage.vue";
 
 const routes = [
     { path: '/', component: HomePage, name: 'home' },
@@ -18,6 +19,11 @@ const routes = [
       name: 'stock-data',
       component: StockData
     },
+    {
+    path: '/indicators',
+    name: 'Indicators',
+    component: Indicators
+    }
 ]
 
 const router = createRouter({

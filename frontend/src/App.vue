@@ -15,6 +15,10 @@
             <i class="el-icon-s-operation"></i>
             <span>策略</span>
           </el-menu-item>
+          <el-menu-item index="3">
+            <i class="el-icon-s-operation"></i>
+            <span>指标</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>
@@ -38,6 +42,8 @@ export default {
         this.$router.push({ name: 'stock-data' });
       } else if (key === '2') {
         this.$router.push({ name: 'home' });
+      } else if (key === '3') {
+        this.$router.push('/indicators');
       }
     }
   }

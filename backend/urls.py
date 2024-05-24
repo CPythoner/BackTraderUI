@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/stock_data/<str:symbol>/', views.get_stock_data),
     path('api/update_stock_data/', views.update_stock_data),
+    path('api/all_stocks/', views.get_all_stocks),
+    path('api/indicators/', views.get_indicators),
     path('', index),
     # re_path(r'^.*$', index),
 ]
