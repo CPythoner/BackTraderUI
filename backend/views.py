@@ -42,38 +42,36 @@ class Register(View):
 
 @api_view(['GET'])
 def get_stock_data(request, symbol):
-    try:
-        stock = Stock.objects.get(a_stock_code=symbol)
-    except Stock.DoesNotExist:
-        return JsonResponse({'status': 'error', 'message': 'Stock not found'}, status=404)
-
+    stock = Stock.objects.get(a_stock_code=symbol)
     if stock.market == 'SSE':
-        StockPrice = StockPriceSSE
+        prices = StockPriceSSE.objects.filter(stock=stock).order_by('date')
     elif stock.market == 'SZSE':
-        StockPrice = StockPriceSZSE
+        prices = StockPriceSZSE.objects.filter(stock=stock).order_by('date')
     elif stock.market == 'BJSE':
-        StockPrice = StockPriceBJSE
+        prices = StockPriceBJSE.objects.filter(stock=stock).order_by('date')
     else:
-        return JsonResponse({'status': 'error', 'message': 'Unknown market'}, status=400)
+        return JsonResponse({'status': 'error', 'message': 'Invalid market'})
 
-    prices = StockPrice.objects.filter(stock=stock).order_by('date')
     data = {
-        'symbol': symbol,
-        'market': stock.market,
+        'name': stock.abbreviation,
         'stock_name': stock.abbreviation,
-        'data': [{
-            'date': price.date.strftime('%Y-%m-%d'),
-            'open': price.open,
-            'high': price.high,
-            'low': price.low,
-            'close': price.close,
-            'volume': price.volume,
-            'turnover': price.turnover,
-        } for price in prices]
+        'data': [
+            {
+                'date': price.date.strftime('%Y-%m-%d'),
+                'open': price.open,
+                'high': price.high,
+                'low': price.low,
+                'close': price.close,
+                'ma5': price.ma5,
+                'ma10': price.ma10,
+                'ma20': price.ma20,
+                'ma30': price.ma30,
+                'nine_turn_signal_count': price.nine_turn_signal_count
+            }
+            for price in prices
+        ]
     }
-
     return JsonResponse(data)
-
 
 @api_view(['POST'])
 def update_stock_data(request):
