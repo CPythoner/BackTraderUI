@@ -2,20 +2,20 @@
   <div class="common-layout" id="app">
     <el-container class="full-height">
       <el-aside width="200px">
-        <el-menu
-          :default-active="activeIndex"
-          class="el-menu-vertical-demo"
-          @select="handleSelect"
-        >
+        <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" @select="handleSelect">
           <el-menu-item index="1">
             <i class="el-icon-data-analysis"></i>
             <span>股票数据</span>
           </el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="12">
+            <i class="el-icon-data-analysis"></i>
+            <span>基金数据</span>
+          </el-menu-item>
+          <el-menu-item index="3">
             <i class="el-icon-s-operation"></i>
             <span>策略</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="4">
             <i class="el-icon-s-operation"></i>
             <span>指标</span>
           </el-menu-item>
